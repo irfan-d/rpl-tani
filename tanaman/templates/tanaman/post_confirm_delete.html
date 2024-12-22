@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delete Plant</title>
+  <style>
+    body {
+      background-color: #f8f9fa; /* Warna latar belakang lembut */
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    .delete-container {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+    }
+
+    h2 {
+      color: #dc3545; /* Warna teks merah */
+      margin-bottom: 20px;
+    }
+
+    p {
+      color: #333333;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #dc3545; /* Tombol merah untuk delete */
+      color: #ffffff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-right: 10px;
+    }
+
+    button:hover {
+      background-color: #c82333;
+    }
+
+    a {
+      text-decoration: none;
+      background-color: #6c757d; /* Tombol abu-abu untuk cancel */
+      color: #ffffff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    a:hover {
+      background-color: #5a6268;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="delete-container">
+      <h2>Delete Plant</h2>
+      <form method="POST">
+        {% csrf_token %}
+        <p>Are you sure that you want to delete the plant "<strong>{{ plant.namaTanam }}</strong>"?</p>
+        <div>
+          <button type="submit">Yes, Delete</button>
+          <a href="{% url 'plants' %}">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

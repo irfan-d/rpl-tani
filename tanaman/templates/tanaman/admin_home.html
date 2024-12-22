@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .table-container {
+        margin: 20px auto;
+        max-width: 800px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        padding: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .actions a {
+        margin-right: 10px;
+        text-decoration: none;
+        color: #007bff;
+    }
+    .actions a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="table-container">
+    <h1>Daftar Tanaman</h1>   
+
+    <table class="table" style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr style="background-color: #e9ecef; text-align: left;">
+                <th style="padding: 10px; border-bottom: 2px solid #ccc;">Tanaman</th>
+                <th style="padding: 10px; border-bottom: 2px solid #ccc;">Jenis Tanaman</th>
+                <th style="padding: 10px; border-bottom: 2px solid #ccc;">Deskripsi Tanaman</th>
+                {% if request.user.is_authenticated and request.user.is_superuser %}
+                <th style="padding: 10px; border-bottom: 2px solid #ccc;">Actions</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for plant in plants %}
+            <tr>
+                <td style="padding: 10px; border-bottom: 1px solid #ccc;">{{ plant.namaTanam }}</td>
+                <td style="padding: 10px; border-bottom: 1px solid #ccc;">{{ plant.jenisTanam }}</td>
+                <td style="padding: 10px; border-bottom: 1px solid #ccc;">{{ plant.deskripsiTanam }}</td>
+                {% if request.user.is_authenticated and request.user.is_superuser %}
+                <td style="padding: 10px; border-bottom: 1px solid #ccc;" class="actions">
+                    <a href="{% url 'plant-edit' plant.id %}">Edit</a>
+                    <a href="{% url 'plant-delete' plant.id %}">Delete</a>
+                </td>
+                {% endif %}
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" style="text-align: center; padding: 10px;">Tidak ada data tanaman tersedia.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

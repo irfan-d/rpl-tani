@@ -1,0 +1,22 @@
+  {% extends 'base.html' %}
+  {% load bootstrap5 %}x
+
+  {% block content %}
+  <h1>Daftar Tanaman</h1>
+
+      <table class="table table-striped">
+        <tr>
+          <th>Tanaman</th>
+          <th>Jenis Tanaman</th>
+          <th>Deskripsi Tanaman</th>
+        </tr>
+
+        {% for plant in plants %}
+        <tr>
+          <td>{{ plant.namaTanam }}</td>
+          <td>{{ plant.jenisTanam }}</td>
+          <td>{{ plant.deskripsiTanam }}</td>
+        </tr>
+      </table>
+    {% endfor %}
+  {% endblock content %}
